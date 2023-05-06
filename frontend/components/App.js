@@ -23,9 +23,9 @@ class App extends React.Component {
     }
   
 
-    handleAdd = () => {
+    handleAdd = (task) => {
     const newTodo = {
-    task: "Cook Things",
+    task: task,
     id: Date.now(),
     completed: false
     };
@@ -35,8 +35,8 @@ class App extends React.Component {
    });
   }
 
-     handleClear = () => {
-      this.SetState({
+    handleClear = () => {
+      this.setState({
       ...this.state,
       todos: this.state.todos.filter(todo => {
       return (todo.completed === false);
@@ -45,10 +45,10 @@ class App extends React.Component {
  }
 
  handleToggle = (clickedId) =>{
-  const clickedId = 1528817077286
+  
   this.setState({
     ...this.state,
-    todos: this.todos.map(todo => {
+    todos: this.state.todos.map(todo => {
       if (todo.id === clickedId) {
       return {
         ...todo,
@@ -67,7 +67,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Todo App</h1>
-        <TodoList handleToggle={handleToggle}todos={todos} />
+        <TodoList handleToggle={this.handleToggle}todos={todos} />
         <TodoForm handleAdd={this.handleAdd}/>
         <button onClick={this.handleClear}>Clear</button>
       </div>
